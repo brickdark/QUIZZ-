@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Quiz App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    .quiz-container { max-width: 600px; margin: auto; }
+    .question { font-weight: bold; margin-top: 15px; }
+    .options label { display: block; margin: 5px 0; }
+    .result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+    button { margin-top: 15px; padding: 8px 16px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Simple Quiz</h2>
+    <form id="quizForm">
+      <div class="question">
+        1. SDE stands for?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="site developing engineer"> site developing engineer</label>
+        <label><input type="radio" name="q1" value="software developer engineer"> software developer engineer</label>
+        <label><input type="radio" name="q1" value="seller discretionary engineer"> seller discretionary engineer</label>
+        <label><input type="radio" name="q1" value="software data engineer"> software data engineer</label>
+      </div>
+
+      <div class="question">
+        2. What is the role of SDE?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="developing"> developing</label>
+        <label><input type="radio" name="q2" value="testing"> testing</label>
+        <label><input type="radio" name="q2" value="debugging"> debugging</label>
+        <label><input type="radio" name="q2" value="all of the above"> all of the above</label>
+      </div>
+
+      <div class="question">
+        3. Who developed C language?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="Dennis Ritchie"> Dennis Ritchie</label>
+        <label><input type="radio" name="q3" value="Bjarne Stroustrup"> Bjarne Stroustrup</label>
+        <label><input type="radio" name="q3" value="James Gosling"> James Gosling</label>
+        <label><input type="radio" name="q3" value="Guido van Rossum"> Guido van Rossum</label>
+      </div>
+
+      <div class="question">
+        4. Find incorrect role of SDE in cloud computing?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="azure developer"> azure developer</label>
+        <label><input type="radio" name="q4" value="cloud consultant"> cloud consultant</label>
+        <label><input type="radio" name="q4" value="cloud data engineer"> cloud data engineer</label>
+        <label><input type="radio" name="q4" value="optimization of resources"> optimization of resources</label>
+      </div>
+
+      <div class="question">
+        5. HTML stands for?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="HyperText Markup Language"> HyperText Markup Language</label>
+        <label><input type="radio" name="q5" value="HighText Machine Language"> HighText Machine Language</label>
+        <label><input type="radio" name="q5" value="HyperTool Multi Language"> HyperTool Multi Language</label>
+        <label><input type="radio" name="q5" value="None"> None</label>
+      </div>
+
+      <button type="button" onclick="checkAnswers()">Submit</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const correctAnswers = {
+        q1: "software developer engineer",
+        q2: "all of the above",
+        q3: "Dennis Ritchie",
+        q4: "optimization of resourcesrs",
+        q5: "HyperText Markup Language"
+      };
+
+      let score = 0;
+      let resultText = "";
+
+      for (let q in correctAnswers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected) {
+          if (selected.value === correctAnswers[q]) {
+            score++;
+            resultText += `<p class="correct">Q${q.slice(1)} Correct ✅</p>`;
+          } else {
+            resultText += `<p class="incorrect">Q${q.slice(1)} Wrong ❌ (Correct: ${correctAnswers[q]})</p>`;
+          }
+        } else {
+          resultText += `<p class="incorrect">Q${q.slice(1)} Not Answered ❌ (Correct: ${correctAnswers[q]})</p>`;
+        }
+      }
+
+      document.getElementById("result").innerHTML =
+        `Your Score: ${score}/5 <br>` + resultText;
+    }
+  </script>
+</body>
+</html>
